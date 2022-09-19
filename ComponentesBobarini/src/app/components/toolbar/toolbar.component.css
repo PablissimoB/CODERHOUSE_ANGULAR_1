@@ -1,0 +1,24 @@
+.bars{
+    background-color: black;
+    width: 100%;
+}
+.image{
+    width: 35px;
+    margin-left: 5px;
+}
+.caption{
+    color: white;
+}
+.lineGray{
+    color: gray;
+    margin-right: 2px;
+}
+a:hover{
+    color: yellow;
+}
+h2{
+    font-family: 'Oswald', sans-serif;
+}
+.sizingV{
+    height: 15vh;
+}

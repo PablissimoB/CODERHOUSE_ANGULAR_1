@@ -1,0 +1,26 @@
+.grid-container{
+    display: grid;
+    grid-template-areas: 
+    'header header header header header header'
+    'menu main main main main main';
+}
+.grid-header{
+    grid-area: header;
+    background-color: yellow;
+    border: solid;
+    margin-top: 1%;
+}
+.grid-menu{
+    grid-area: menu;
+    background-color: green;
+    color: white;
+    border: solid black;
+    margin-top: 1%;
+}
+.grid-student{
+    grid-area: main;
+    background-color: blue;
+    color: white;
+    border: solid black;
+    margin-top: 1%;
+}

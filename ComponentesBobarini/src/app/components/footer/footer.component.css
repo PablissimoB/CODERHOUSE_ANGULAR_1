@@ -1,0 +1,17 @@
+.bars{
+    background-color: black;
+}
+.caption{
+    color: gray;
+    font-size: small;
+}
+.icons{
+    width: 20px;
+    margin-left: 5px;
+}
+.youtube{
+    height: 20px;
+}
+.sizingV{
+    height: 8vh;
+}

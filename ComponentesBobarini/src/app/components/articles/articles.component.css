@@ -1,0 +1,15 @@
+.accordion-button:not(.collpased){
+    background-color: black;
+    color: white;
+}
+.accordion-button:not(.collpased)::after{
+    filter: brightness(0%) invert(100%);
+}
+.accordion-button:focus{
+    box-shadow: inherit;
+    background-color: gray;
+    color: black;
+}
+.accordion-button:focus::after{
+    filter: brightness(0%) invert(0%);
+}

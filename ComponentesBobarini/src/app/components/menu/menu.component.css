@@ -1,0 +1,38 @@
+.background{
+    background-color: black;
+    width: 100%;
+}
+.separate{
+    border-radius: 0%;
+}
+.sizingV{
+    height: 70vh;
+}
+.sizingVB{
+    height: 3.5vh;
+}
+.image{
+    width: 50px;
+}
+.caption{
+    color: white;
+}
+.lineGray{
+    color: gray;
+}
+button{
+    border: none;
+}
+.btn{
+    border-radius: 0px;
+    font-size:smaller;
+    background-color: black;
+}
+.btn:hover{
+    background-color: darkgray;
+    color: black;
+}
+.btn:focus {
+    background-color: white;
+    color: black;
+  }

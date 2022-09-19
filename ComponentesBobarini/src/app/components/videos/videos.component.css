@@ -1,0 +1,11 @@
+.responsive {
+    width: 100%;
+    height: 20vh;
+  }
+.backgroundColor{
+    background-color: black;
+    border-radius: 0px;
+}
+.captionColor{
+    color: white;
+}
