@@ -1,1 +1,67 @@
-<p>lista-alumnos works!</p>
+<div [ngClass]="background" class="dimensionY">
+<h1> Alumnos </h1>
+
+<hr>
+
+Cambiar estilo de pagina:
+<button type="button" class="btn btn-dark" (click)="setBackground('oscuro')" >Estilo 1</button>
+<button type="button" class="btn btn-dark" (click)="setBackground('claro')">Estilo 2</button>
+
+<h2> Listado de todos los alumnos</h2>
+<ol>
+    <div *ngFor="let estudiante of listaEstudiantes">
+        <li>
+            <div [style.text-decoration]="estudiante.beca ==true? 'underline': '' "> {{ estudiante.apellido | uppercase}}, {{ estudiante.nombre }} </div>
+        </li>
+    </div>
+</ol>
+<p class="nota">*Nombres subrayados tienen beca</p>
+
+<h2> Alumnos que cursan Phyton</h2>
+<div class="tabla">
+    <table class="table" [ngClass]="background">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+        <ng-container *ngFor="let estudiante of listaEstudiantes">
+            <tr *ngIf="estudiante.carrera ==='Phyton'">
+                <td >{{ estudiante.nombre }}</td>
+                <td>{{ estudiante.apellido}} </td>
+            </tr>
+        </ng-container>
+    </table>
+</div>
+
+<h2> Alumnos que cursan Angular</h2>
+<div class="tabla">
+    <table class="table" [ngClass]="background">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+        <ng-container *ngFor="let estudiante of listaEstudiantes">
+            <tr *ngIf="estudiante.carrera ==='Angular'">
+                <td>{{ estudiante.nombre }}</td>
+                <td>{{ estudiante.apellido}} </td>
+            </tr>
+        </ng-container>
+    </table>
+</div>
+
+<h2> Situación Beca Alumnos</h2>
+    <div *ngFor="let estudiante of listaEstudiantes">
+        <div [ngSwitch]="estudiante.beca">
+                    <ul *ngSwitchCase=true>
+                        <li>{{estudiante.nombre}},
+                        {{estudiante.apellido | uppercase}} -
+                        Con Beca</li>
+                    </ul>
+                <ul *ngSwitchCase=false>
+                    <li>{{estudiante.nombre}},
+                    {{estudiante.apellido | uppercase}} -
+                    Sin Beca</li>
+                </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+button{
+    margin-left: 1%;
+}
+.listaNoDecorada{
+    list-style: none;
+}
+.oscuro{
+    background-color: black;
+    color: white;
+}
+.claro{
+    background-color: white;
+    color: black;
+}
+.tabla{
+    width: 25%;
+}
+.dimensionY{
+    height: 100vh;
+}
+.nota{
+    font-size: smaller;
+}
