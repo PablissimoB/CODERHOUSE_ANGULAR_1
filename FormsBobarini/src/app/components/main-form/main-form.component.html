@@ -1,0 +1,101 @@
+<h1>Lista Alumnos</h1>
+<hr>
+<button (click)="resetValues(); setVisibilityC('visible'); setVisibilityE('invisible')" id="liveToastBtn" class="button btn btn-success">Agregar</button>
+
+<div [ngClass]="displayC">
+  <form [formGroup]="formularioEstudiante" >
+      <h2>Alta</h2>
+      <div class="row">
+        <div class="col-2">
+            <label for="dniStudent" class="form-label">DNI</label>
+            <input type="number" class="form-control" id="dniStudent" aria-describedby="dniHelp" formControlName="dni" [(ngModel)]="dni" (focusout)="onFocusOutEvent('dni')">
+            <p *ngIf="touchedFormDni == true && formularioEstudiante.get('dni')?.errors?.['required']">El DNI es Requerido</p>
+        </div>
+        <div class="col-4">
+            <label for="nameStudent" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nameStudent" aria-describedby="nameHelp" formControlName="nombre" [(ngModel)]="nombre" (focusout)="onFocusOutEvent('nombre')">
+            <p *ngIf="touchedFormNombre == true && formularioEstudiante.get('nombre')?.errors?.['required']">El nombre es Requerido</p>
+            <p *ngIf="touchedFormNombre == true && formularioEstudiante.get('nombre')?.errors?.['minlength']">El largo del nombre debe ser mayor a 2 letras</p>
+        </div>
+        <div class="col-4">
+          <label for="lastStudent" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="lastStudent" aria-describedby="lastHelp" formControlName="apellido" [(ngModel)]="apellido" (focusout)="onFocusOutEvent('apellido')">
+          <p *ngIf="touchedFormApellido == true && formularioEstudiante.get('apellido')?.errors?.['required']">El apellido es Requerido</p>
+          <p *ngIf="touchedFormNombre == true && formularioEstudiante.get('apellido')?.errors?.['minlength']">El largo del apellido debe ser mayor a 2 letras</p>
+        </div>
+        <div class="col-2">
+          <label for="Career" class="form-label">Carrera</label>
+          <select class="form-select" name="" id="" formControlName="carrera" [(ngModel)]="carrera" (focusout)="onFocusOutEvent('carrera')">
+          <ng-container *ngFor="let item of carrers">
+            <option value="{{item.nombre}}">{{item.nombre}}</option>
+          </ng-container>
+        </select>
+        <p *ngIf="touchedFormCarrera == true && formularioEstudiante.get('carrera')?.errors?.['required']">Elija una carrera</p>
+        </div>
+      </div>
+      <button type="submit" (click)="addStudent()" class="button btn btn-primary" [disabled]="formularioEstudiante.invalid">Confirmar</button>
+      <button (click)="setVisibilityC('invisible')" class="button btn btn-danger">Cancelar</button>
+  </form>
+</div>
+
+<div [ngClass]="displayE">
+  <form [formGroup]="formularioEstudianteEditar" >
+    <h2>Modificacion</h2>
+    <div class="row">
+      <div class="col-2">
+          <label for="dniStudent" class="form-label">DNI</label>
+          <input type="number" class="form-control" id="dniStudent" aria-describedby="dniHelp" formControlName="dni" [(ngModel)]="dni">
+          <p *ngIf="formularioEstudianteEditar.get('dni')?.touched && formularioEstudianteEditar.get('dni')?.errors?.['required']">El DNI es Requerido</p>
+      </div>
+      <div class="col-4">
+          <label for="nameStudent" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nameStudent" aria-describedby="nameHelp" formControlName="nombre" [(ngModel)]="nombre">
+          <p *ngIf="formularioEstudianteEditar.get('nombre')?.touched && formularioEstudianteEditar.get('nombre')?.errors?.['required']">El nombre es Requerido</p>
+          <p *ngIf="formularioEstudianteEditar.get('nombre')?.touched && formularioEstudianteEditar.get('nombre')?.errors?.['minlength']">El largo del nombre debe ser mayor a 2 letras (lo siento Elon)</p>
+      </div>
+      <div class="col-4">
+        <label for="lastStudent" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="lastStudent" aria-describedby="lastHelp" formControlName="apellido" [(ngModel)]="apellido">
+        <p *ngIf="formularioEstudianteEditar.get('apellido')?.touched && formularioEstudianteEditar.get('apellido')?.errors?.['required']">El apellido es Requerido</p>
+        <p *ngIf="formularioEstudianteEditar.get('apellido')?.touched && formularioEstudianteEditar.get('apellido')?.errors?.['minlength']">El largo del nombre debe ser mayor a 2 letras</p>
+      </div>
+      <div class="col-2">
+        <label for="Career" class="form-label">Carrera</label>
+        <select class="form-select" name="" id="" formControlName="carrera" [(ngModel)]="carrera">
+        <ng-container *ngFor="let item of carrers">
+          <option value="{{item.nombre}}">{{item.nombre}}</option>
+        </ng-container>
+      </select>
+      <p *ngIf="formularioEstudianteEditar.get('carrera')?.touched && formularioEstudianteEditar.get('carrera')?.errors?.['required']">Elija una carrera</p>
+      </div>
+    </div>
+    <button type="submit" (click)="updateStudent(studentSelected.dni)" class="button btn btn-primary" [disabled]="formularioEstudiante.invalid">Confirmar</button>
+    <button (click)="setVisibilityE('invisible'); resetValues()" class="button btn btn-danger">Cancelar</button>
+  </form>
+</div>
+
+
+
+<table class="table table-striped">
+    <tr>
+        <th>Fecha Alta</th>
+        <th>DNI</th>
+        <th>Apellido</th>
+        <th>Nombre</th>
+        <th>Carrera</th>
+    </tr>
+    <ng-container *ngFor="let student of students">
+      <ng-container *ngIf="student.deleted === false">
+        <tr>
+            <td>{{student.fechaAlta | date: 'dd/MM/yyyy'}}</td>
+            <td>{{student.dni}}</td>
+            <td>{{student.apellido}}</td>
+            <td>{{student.nombre}}</td>
+            <td>{{student.carrera}}</td>
+            <td><button (click)="editStudent(student.dni)" class="roundedButton"><img src="../../../assets/images/edit.png" class="imageIcon" alt=""></button></td>
+            <td><button (click)="deleteStudent(student.dni)" class="roundedButton"><img src="../../../assets/images/delete.png" class="imageIcon" alt=""></button></td>
+        </tr>
+      </ng-container>
+    </ng-container>
+</table>
+

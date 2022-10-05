@@ -1,0 +1,23 @@
+.imageIcon{
+    width: 15px;
+}
+.invisible{
+    display: none;
+}
+.visible{
+    display: contents;
+}
+.flex{
+    display: flex;
+}
+.button{
+   margin-right: 10px;
+   margin-bottom: 10px;
+   margin-top: 10px;
+}
+p{
+    color: red;
+}
+.roundedButton{
+    border-radius: 50%;
+}
