@@ -84,6 +84,13 @@ touchedFormCarrera: boolean =false;
     this.carrera ='';
   }
 
+  resetForm(){
+    this.touchedFormDni = false;
+    this.touchedFormNombre = false;
+    this.touchedFormApellido = false;
+    this.touchedFormCarrera = false;
+  }
+
 
   addStudent(){
     const newStudent: Students ={
@@ -97,10 +104,6 @@ touchedFormCarrera: boolean =false;
     this.students.push(newStudent); 
     this.setVisibilityC('invisible');
     this.resetValues();
-    this.touchedFormDni = false;
-    this.touchedFormNombre = false;
-    this.touchedFormApellido = false;
-    this.touchedFormCarrera = false;
   }
 
   

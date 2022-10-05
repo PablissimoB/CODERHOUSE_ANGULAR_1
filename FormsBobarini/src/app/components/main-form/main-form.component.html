@@ -1,6 +1,6 @@
 <h1>Lista Alumnos</h1>
 <hr>
-<button (click)="resetValues(); setVisibilityC('visible'); setVisibilityE('invisible')" id="liveToastBtn" class="button btn btn-success">Agregar</button>
+<button (click)="resetValues(); setVisibilityC('visible'); setVisibilityE('invisible'); resetForm()" id="liveToastBtn" class="button btn btn-success">Agregar</button>
 
 <div [ngClass]="displayC">
   <form [formGroup]="formularioEstudiante" >
