@@ -1,0 +1,59 @@
+<div class="row">
+    <mat-form-field class="col-md-3 ">
+        <mat-label>Buscar por DNI de alumno</mat-label>
+        <input type="text" matInput (keyup)="filtrarDni($event)">
+    </mat-form-field>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 appDirectiveTitle>Gestión de Alumnos</h1>
+            <hr>
+            <button mat-raised-button color="accent" class="marginTop"  (click)="openDialogAdd()">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+    <div class="row">
+            <table mat-table [dataSource]="dataSourceEstudiantes" class="mat-elevation-z8 col-md-12 marginTop">
+                
+                <ng-container matColumnDef="dni">
+                    <th mat-header-cell *matHeaderCellDef  mat-sort-header>Dni</th>
+                    <td mat-cell *matCellDef="let estudiante">{{ estudiante.dni }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="nombreCompleto">
+                    <th mat-header-cell *matHeaderCellDef>Nombre Completo</th>
+                    <td mat-cell *matCellDef="let estudiante" >{{ estudiante | pipeNombreCompleto}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="fechaNacimiento">
+                    <th mat-header-cell *matHeaderCellDef>Fecha Nacimiento</th>
+                    <td mat-cell *matCellDef="let estudiante">{{ estudiante.fechaNacimiento | date: 'dd/MM/YYYY' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let estudiante">
+                        <button mat-icon-button (click)="openDialogEdit(estudiante.dni)">
+                            <mat-icon color="primary">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteStudent(estudiante.dni)">
+                            <mat-icon color="warn">delete</mat-icon> 
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnasEstudiantes"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasEstudiantes" ></tr>
+            </table>
+            <div class="marginTop">
+                <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]"
+                showFirstLastButtons 
+                aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+    </div>
+</div>

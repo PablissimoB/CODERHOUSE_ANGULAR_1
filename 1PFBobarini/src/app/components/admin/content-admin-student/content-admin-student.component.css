@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.spaceBetween{
+    margin-left: 10px;
+}
+.marginTop{
+    margin-top: 10px;
+}
