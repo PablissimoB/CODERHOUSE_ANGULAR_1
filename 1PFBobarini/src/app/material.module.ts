@@ -25,7 +25,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatNativeDateModule,
         MatDialogModule,
         MatDatepickerModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        
     ],
     exports: [
         MatButtonModule,
@@ -39,7 +40,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatNativeDateModule,
         MatDialogModule,
         MatDatepickerModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        
     ]
 })
 export class MaterialModule {}

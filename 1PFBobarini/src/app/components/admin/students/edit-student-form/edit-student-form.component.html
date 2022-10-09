@@ -6,14 +6,16 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Dni</mat-label>
                     <input matInput formControlName="dni">
+                    <mat-error *ngIf="formEstudiante.get('dni')?.errors?.['required']">El DNI es requerido</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-6">
 
                 <mat-form-field>
-                    <input matInput [matDatepicker]="picker1" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento">
+                    <input matInput [matDatepicker]="picker1" placeholder="Fecha de Nacimiento" [max]="maxDate" formControlName="fechaNacimiento">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="formEstudiante.get('fechaNacimiento')?.errors?.['required']">La fecha es requerida</mat-error>
                   </mat-form-field>
 
             </div>
@@ -22,14 +24,28 @@
             <mat-form-field appearance="fill">
                 <mat-label>Nombre</mat-label>
                 <input matInput formControlName="nombre">
+                <mat-error *ngIf="formEstudiante.get('nombre')?.errors?.['required']">El nombre es requerido</mat-error>
+                <mat-error *ngIf="formEstudiante.get('nombre')?.errors?.['minlength']">El largo del nombre debe ser mayor a 2 letras</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field appearance="fill">
                 <mat-label>Apellido</mat-label>
                 <input matInput formControlName="apellido" >
+                <mat-error *ngIf="formEstudiante.get('apellido')?.errors?.['required']">El apellido es requerido</mat-error>
+                <mat-error *ngIf="formEstudiante.get('apellido')?.errors?.['minlength']">El largo del apellido debe ser mayor a 2 letras</mat-error>
             </mat-form-field>
         </div>
+
+        <div class="row marginBottom">
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="mail" placeholder="Ingrese el mail">
+                <mat-error *ngIf="formEstudiante.get('mail')?.errors?.['required']">El mail es requerido</mat-error>
+                <mat-error *ngIf="formEstudiante.get('mail')?.errors?.['pattern']">El mail no cumple con formato requerido</mat-error>
+            </mat-form-field>
+        </div>
+
     </form>
 </div>
 <div mat-dialog-actions>

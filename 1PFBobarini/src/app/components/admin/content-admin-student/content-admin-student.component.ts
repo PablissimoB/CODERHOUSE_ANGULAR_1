@@ -18,7 +18,7 @@ export class ContentAdminComponent implements OnInit {
   
   estudiantes : Array<Student> = students;
   estudianteEditar:any;
-  columnasEstudiantes: string[] = ['dni', 'nombreCompleto', 'fechaNacimiento', 'acciones']
+  columnasEstudiantes: string[] = ['dni', 'nombreCompleto', 'fechaNacimiento','mail', 'acciones']
   dataSourceEstudiantes: MatTableDataSource<Student> = new MatTableDataSource<Student>(this.estudiantes);
 
   @ViewChild(MatPaginator)
@@ -39,7 +39,7 @@ export class ContentAdminComponent implements OnInit {
 
   openDialogAdd(){
     let dialog = this.dialog.open(AddStudentFormComponent, {
-      width: '50%', height: '50%',
+      width: '55%', height: '70%',
     })
     dialog.beforeClosed().subscribe(res =>{
       //comprueba que res no este vacio - caso boton cancelar
@@ -53,7 +53,6 @@ export class ContentAdminComponent implements OnInit {
               vigente : true,
             }
           )
-          alert("Registro exitoso.")
           this.dataSourceEstudiantes.data = this.estudiantes;
         }
         else{
@@ -67,8 +66,8 @@ export class ContentAdminComponent implements OnInit {
   openDialogEdit(dniE:number){
     this.estudianteEditar = this.estudiantes[this.estudiantes.findIndex(estudiante => estudiante.dni == dniE)];
     let dialog = this.dialog.open(EditStudentFormComponent, {
-      width: '50%',
-      height: '50%', 
+      width: '55%',
+      height: '70%', 
       data: {
         dataKey: this.estudianteEditar,
         }
@@ -81,6 +80,7 @@ export class ContentAdminComponent implements OnInit {
           this.estudiantes[objIndex].nombre = res.nombre;
           this.estudiantes[objIndex].apellido = res.apellido;
           this.estudiantes[objIndex].fechaNacimiento = res.fechaNacimiento;
+          this.estudiantes[objIndex].mail = res.mail;
           this.dataSourceEstudiantes.data = this.estudiantes;
         }
       })

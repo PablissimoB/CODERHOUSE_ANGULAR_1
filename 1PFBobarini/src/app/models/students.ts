@@ -3,6 +3,7 @@ export interface Student{
     apellido: string,
     nombre: string,
     fechaNacimiento: Date,
+    mail: string,
     vigente: boolean,
 }
 export let students: Student [] =[
@@ -11,6 +12,7 @@ export let students: Student [] =[
         nombre:'Violeta',
         apellido:'Valery',
         fechaNacimiento: new Date(1980, 8, 11),
+        mail: 'prueba1@coderhouse.com',
         vigente: true,
     },
     {
@@ -18,6 +20,7 @@ export let students: Student [] =[
         nombre:'Santuzza',
         apellido:'Rusticana',
         fechaNacimiento: new Date(1985, 5, 20),
+        mail: 'prueba2@coderhouse.com',
         vigente: true,
     },
     {
@@ -25,6 +28,7 @@ export let students: Student [] =[
         nombre:'Butterfly',
         apellido:'Pinkerton',
         fechaNacimiento: new Date(1990, 8, 19),
+        mail: 'prueba3@coderhouse.com',
         vigente: true,
     },
     {
@@ -32,6 +36,7 @@ export let students: Student [] =[
         nombre:'Turandot',
         apellido:'Puccini',
         fechaNacimiento: new Date(1950, 8, 11),
+        mail: 'prueba4@coderhouse.com',
         vigente: true,
     }
 ]

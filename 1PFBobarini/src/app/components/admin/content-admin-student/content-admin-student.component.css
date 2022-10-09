@@ -9,3 +9,6 @@
 .marginTop{
     margin-top: 10px;
 }
+table th{
+    vertical-align: middle;
+}
