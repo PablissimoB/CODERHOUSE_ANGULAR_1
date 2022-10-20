@@ -1,0 +1,50 @@
+<h1 class="text-center">Cursos</h1>
+<hr>
+<div class="container-fluid">
+    
+    <div class="row justify-content-md-center">
+        <div class="col-md-1">
+            <p>Filtros</p>
+            <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" [(ngModel)]="mostrar" (ngModelChange)="showAll($event)">
+            <label class="btn btn-outline-success" for="btn-check-3">{{mostrar | booleanPipe: 'Filtrado' : 'Desfiltrado'}}</label>
+        </div>
+        <div class="col-md-3" [ngClass]="estilo">
+            <p>Nombre:</p>
+            <input type="text" class="form-control" [(ngModel)]="name" (ngModelChange)="SearchName($event)">
+        </div>
+        <div class="col-md-1" [ngClass]="estilo">
+            <p>Estado:</p>
+            <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off" [(ngModel)]="active" (ngModelChange)="FilterByStatus($event)">
+            <label class="btn btn-outline-success" for="btn-check-2">{{active | booleanPipe: 'Activo' : 'Inactivo'}}</label>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-md-center" id="allCoursesObservable">
+        <div class="col-1 card" style="width: 18rem;" *ngFor="let item of cursos$|async">
+            <img src="{{item.img}}" class="card-img-top imgSize" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.nombre}}</h5>
+              <p class="card-text"> Comision: {{item.comision}}</p>
+              <p class="card-text"> Profesor: {{item.profesor}}</p>
+              <p class="card-text"> Fecha Inicio: {{item.inicio | date: 'dd/MM/YYYY'}}</p>
+              <p class="card-text"> Fecha Inicio: {{item.fin | date: 'dd/MM/YYYY'}}</p>
+              <p class="card-text"> Estado: {{item.activo | booleanPipe: 'Activo' : 'Inactivo'}}</p>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="text-center">Profesores</h1>
+    <hr>
+
+    <div class="row justify-content-md-center" id="allCoursesObservable">
+        <div class="col-1 card" style="width: 18rem;" *ngFor="let item of promesa |async ">
+            <div class="card-body">
+              <p class="card-text"> Dni: {{item.dni}}</p>
+              <p class="card-text"> Nombre: {{item.nombre}}</p>
+              <p class="card-text"> Apellido: {{item.apellido}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
