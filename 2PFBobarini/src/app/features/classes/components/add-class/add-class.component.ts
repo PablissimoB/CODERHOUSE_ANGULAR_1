@@ -56,7 +56,9 @@ export class AddClassComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  ngOnDestroy(){
+    this.suscripcion.unsubscribe();
+  }
   save(){
     let idMax:number = Math.max.apply(null, this.clases.map(o => o.id));
 

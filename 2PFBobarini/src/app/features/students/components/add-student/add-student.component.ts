@@ -42,7 +42,7 @@ export class AddStudentComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  ngOnDestroy(): void{
+  ngOnDestroy(){
     
   }
   save(){

@@ -22,7 +22,10 @@ export class ListClassesComponent implements OnInit {
   joinedCursos!:any;
   joinedEstudiantes!:any;
   suscripcion!:any;
-  availability = 'available';
+  available = 'available';
+  unavailable = 'unavailable';
+  mostrar='mostrar';
+  ocultar='ocultar;'
 
   constructor(
     private claseService: ClassesService,
@@ -34,9 +37,7 @@ export class ListClassesComponent implements OnInit {
     this.clases$ = this.claseService.obtener().pipe(
       map((item: Classes[]) => item.filter((item: Classes) => item.deleted ==false))
       );
-    this.cursos$ = this.cursoService.obtenerCursos().pipe(
-      map((item: Course[]) => item.filter((item: Course) => item.deleted ==false))
-      );
+    this.cursos$ = this.cursoService.obtenerCursos();
     this.estudiantes$ = this.estudianteService.obtenerEstudiantes().pipe(
       map((item: Students[]) => item.filter((item: Students) => item.deleted ==false))
       );
@@ -55,8 +56,13 @@ export class ListClassesComponent implements OnInit {
   ngOnInit(): void {
       this.crearClasesCursos();
       this.crearClasesEstudiantes();
+      console.log(this.joinedCursos);
   }
+  
 
+  ngOnDestroy(){
+    this.suscripcion.unsubscribe();
+  }
   crearClasesCursos(){
     combineLatest([
       this.clases$,this.cursos$
@@ -108,6 +114,10 @@ export class ListClassesComponent implements OnInit {
 
   editar(id: number){
     this.router.navigate(['features/clases/edit',{id:id}]);
+  }
+
+  agregarEstudiante(id:number, curso:string){
+    this.router.navigate(['features/clases/addStudent',{id:id,curso:curso}]);
   }
 
   eliminarEstudiante(idE: number, idC:number){

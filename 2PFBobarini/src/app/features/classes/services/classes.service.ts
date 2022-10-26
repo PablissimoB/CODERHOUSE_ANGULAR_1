@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Classes } from '../../../models/classes';
 
 @Injectable({
@@ -48,11 +48,23 @@ export class ClassesService {
   obtenerId(id:number){
     return this.clases[id-1];
   }
+  actualizarEstado(idCurso:number){
+    let clasesActualizadas = this.clases.filter(item => item.idCourse === idCurso);
+    for(let i of clasesActualizadas){
+      i.available=false;
+      let indice = this.clases.findIndex((c: Classes) => c.id === i.id);
+      if(indice > -1){
+        this.clases[indice] = i;
+      }
+      this.clasesSubject.next(this.clases);
+    }
+  }
 
   agregar(item: Classes){
     this.clases.push(item);
     this.clasesSubject.next(this.clases);
   }
+  
   eliminar(id:number){
     let indice = this.clases.findIndex((c: Classes) => c.id ===id)
     if(indice > -1){
@@ -65,7 +77,6 @@ export class ClassesService {
     if(indice > -1){
       for( let i of this.clases[indice].idStudent){
         if(i === idE){
-
           const indice2 = this.clases[indice].idStudent.indexOf(i);
           this.clases[indice].idStudent.splice(indice2,1);
         }
@@ -73,9 +84,23 @@ export class ClassesService {
     }
     this.clasesSubject.next(this.clases);
   }
-  cambiarEstado(){
+  agregarAlumno(idE:number,idC:number){
+    let indice = this.clases.findIndex((c: Classes) => c.id ===idC)
+    let agregar :boolean = true;
+    if(indice > -1){
 
+      for( let i of this.clases[indice].idStudent){
+        if(i === idE){
+          agregar=false;
+        }
+      }
+      if(agregar){
+        this.clases[indice].idStudent.push(idE);
+      }
+    }
+    this.clasesSubject.next(this.clases);
   }
+
   editar(item: Classes){
     let indice = this.clases.findIndex((c: Classes) => c.id === item.id);
     if(indice > -1){

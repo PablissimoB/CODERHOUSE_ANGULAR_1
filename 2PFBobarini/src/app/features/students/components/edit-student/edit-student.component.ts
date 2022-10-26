@@ -39,6 +39,9 @@ export class EditStudentComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  ngOnDestroy(){
+    
+  }
   save(){
     let c: Students = {
       idStudent : this.id,

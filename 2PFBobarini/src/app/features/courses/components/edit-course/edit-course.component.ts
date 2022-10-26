@@ -20,9 +20,7 @@ export class EditCourseComponent implements OnInit {
     private cursoService: CoursesService,
     private router: Router,
     private _Activatedroute:ActivatedRoute,
-  ) { }
-
-  ngOnInit(): void {
+  ) { 
     this.id= Number(this._Activatedroute.snapshot.paramMap.get("id"));
 
     this.curso = this.cursoService.obtenerCursoId(this.id);
@@ -33,8 +31,14 @@ export class EditCourseComponent implements OnInit {
       profesor: new FormControl(this.curso.profesor, [Validators.required]),
       img: new FormControl(this.curso.img?.substring(20,50))
     })
+
   }
 
+  ngOnInit(): void {
+  }
+  ngOnDestroy(){
+    
+  }
   save(){
     let c: Course = {
       id: this.id,

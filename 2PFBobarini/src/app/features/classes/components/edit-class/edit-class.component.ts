@@ -62,7 +62,9 @@ export class EditClassComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  ngOnDestroy(){
+    
+  }
   save(){
     let c: Classes ={
       id : this.id,

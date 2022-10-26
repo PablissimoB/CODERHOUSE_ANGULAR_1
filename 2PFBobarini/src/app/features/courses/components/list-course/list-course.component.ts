@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { Course } from 'src/app/models/courses';
 import { CoursesService } from '../../services/courses.service';
+import { ClassesService } from '../../../classes/services/classes.service';
+import { Classes } from 'src/app/models/classes';
 
 @Component({
   selector: 'app-list-course',
@@ -12,9 +14,11 @@ import { CoursesService } from '../../services/courses.service';
 export class ListCourseComponent implements OnInit {
 
   cursos$!: Observable<Course[]>
+  clase!: Classes[]
 
   constructor(
     private cursoService: CoursesService,
+    private claseService: ClassesService,
     private router: Router
   ) { }
 
@@ -23,8 +27,10 @@ export class ListCourseComponent implements OnInit {
       map((cursos: Course[]) => cursos.filter((curso: Course) => curso.deleted ==false))
       );
   }
+  
   eliminarCurso(id: number){
     if(confirm("Esta seguro de eliminar el elemento id: "+id)) {
+      this.claseService.actualizarEstado(id);
       this.cursoService.eliminarCurso(id);
     }
   }

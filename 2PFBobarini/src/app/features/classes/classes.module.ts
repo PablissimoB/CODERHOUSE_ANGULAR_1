@@ -7,13 +7,15 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddClassComponent } from './components/add-class/add-class.component';
 import { EditClassComponent } from './components/edit-class/edit-class.component';
 import { InitClassComponent } from './components/init-class/init-class.component';
+import { AddStudentClassComponent } from './components/add-student-class/add-student-class.component';
 
 @NgModule({
   declarations: [
     InitClassComponent,
     ListClassesComponent,
     AddClassComponent,
-    EditClassComponent
+    EditClassComponent,
+    AddStudentClassComponent
   ],
   imports: [
     CommonModule,

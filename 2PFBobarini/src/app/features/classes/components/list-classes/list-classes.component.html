@@ -8,7 +8,7 @@
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       <div class="title"> {{item.nombre}} - {{item.profesor}} </div> - Comision: {{item.id}} - {{item.inicio | date: 'dd/MM/YYYY'}} - {{item.fin | date: 'dd/MM/YYYY'}}
-                      <div class="availability" [ngClass]="availability">
+                      <div class="availability"  [ngClass]="item.available ==true? available : unavailable">
                         {{item.available | convertirBooleano: "(Available)": "(Unavailable)"}}
                       </div>
                     </mat-panel-title>
@@ -27,6 +27,9 @@
                   </mat-expansion-panel-header>
                   <h4>Alumnos</h4>
                   <hr>
+                  <button  mat-mini-fab color="accent" *ngIf="item.available ==true" (click)="agregarEstudiante(item.id, item.nombre +'-'+item.profesor)">
+                    <mat-icon>add</mat-icon>
+                  </button>
                   <div class="row">
                     <ng-container *ngFor="let item2 of joinedEstudiantes">
                         <div class="col-md-6" *ngIf="item2.idClase === item.id && item2.deleted == false && item2.idClase !==0">
