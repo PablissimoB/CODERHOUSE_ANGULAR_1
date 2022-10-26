@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { EditStudentComponent } from './components/edit-student/edit-student.component';
 import { InitStudentComponent } from './components/init-student/init-student.component';
+import { ViewStudentComponent } from './components/view-student/view-student.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { InitStudentComponent } from './components/init-student/init-student.com
     ListStudentsComponent,
     AddStudentComponent,
     EditStudentComponent,
-    InitStudentComponent
+    InitStudentComponent,
+    ViewStudentComponent
   ],
   imports: [
     CommonModule,

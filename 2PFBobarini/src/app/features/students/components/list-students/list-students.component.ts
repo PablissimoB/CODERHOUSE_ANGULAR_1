@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Students } from 'src/app/models/students';
 import { StudentsService } from '../../services/students.service';
+import { ViewStudentComponent } from '../view-student/view-student.component';
 
 @Component({
   selector: 'app-list-students',
@@ -15,7 +17,7 @@ export class ListStudentsComponent implements OnInit {
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-
+  estudiante!: Students;
   estudiantes$!: Observable<Students[]>
   estudiantes!: Array<Students>;
   suscripcion: any;
@@ -26,7 +28,8 @@ export class ListStudentsComponent implements OnInit {
   
   constructor(
     private estudianteService: StudentsService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { 
     this.estudiantes$ = this.estudianteService.obtenerEstudiantes().pipe(
       map((cursos: Students[]) => cursos.filter((curso: Students) => curso.deleted ==false))
@@ -62,5 +65,14 @@ export class ListStudentsComponent implements OnInit {
   }
   editar(id: number){
     this.router.navigate(['features/estudiantes/edit',{id:id}]);
+  }
+  consultar(id: number){
+    this.estudiante = this.estudiantes[this.estudiantes.findIndex(estudiante => estudiante.idStudent == id)];
+    let dialog = this.dialog.open(ViewStudentComponent, {
+      width: '40%', height: '40%',
+      data: {
+        dataKey: this.estudiante,
+        }
+    });
   }
 }

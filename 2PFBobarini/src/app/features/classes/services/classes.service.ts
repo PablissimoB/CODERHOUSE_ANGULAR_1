@@ -55,7 +55,7 @@ export class ClassesService {
       let indice = this.clases.findIndex((c: Classes) => c.id === i.id);
       if(indice > -1){
         this.clases[indice] = i;
-      }
+        }
       this.clasesSubject.next(this.clases);
     }
   }
@@ -72,6 +72,7 @@ export class ClassesService {
     }
     this.clasesSubject.next(this.clases);
   }
+
   eliminarAlumno(idE:number,idC:number){
     let indice = this.clases.findIndex((c: Classes) => c.id ===idC)
     if(indice > -1){

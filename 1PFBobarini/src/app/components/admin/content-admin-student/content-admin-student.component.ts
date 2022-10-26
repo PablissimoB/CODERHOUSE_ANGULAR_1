@@ -39,7 +39,7 @@ export class ContentAdminComponent implements OnInit {
 
   openDialogAdd(){
     let dialog = this.dialog.open(AddStudentFormComponent, {
-      width: '55%', height: '70%',
+      width: '40%', height: '50%',
     })
     dialog.beforeClosed().subscribe(res =>{
       //comprueba que res no este vacio - caso boton cancelar
