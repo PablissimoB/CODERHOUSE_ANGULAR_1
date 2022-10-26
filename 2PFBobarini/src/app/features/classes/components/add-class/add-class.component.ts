@@ -18,7 +18,7 @@ export class AddClassComponent implements OnInit {
   suscripcion: any;
   formClass!: FormGroup;
   id!:number;
-  cursos!: Course[];
+  cursos$!: Observable<Course[]>;
 
   constructor(
     private clasesService: ClassesService,
@@ -41,16 +41,9 @@ export class AddClassComponent implements OnInit {
       fin: new FormControl('', [Validators.required])
     })
 
-    this.cursoService.obtenerCursos().pipe(
+    this.cursos$ = this.cursoService.obtenerCursos().pipe(
       map((item: Course[]) => item.filter((item: Course) => item.deleted ==false))
-      ).subscribe({
-        next: (c: Course[]) => {
-          this.cursos = c;
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
+      )
 
   }
 

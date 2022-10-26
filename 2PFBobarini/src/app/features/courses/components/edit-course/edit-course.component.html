@@ -5,7 +5,7 @@
             
             <div class="row justify-content-md-center">
             <div class="col-md-5">
-                <mat-form-field appearance="fill" class="fill" >
+                <mat-form-field appearance="fill" >
                     <mat-label>Nombre del curso</mat-label>
                     <input matInput formControlName="nombre" class="colorFont">
                 </mat-form-field>
@@ -29,7 +29,7 @@
         </div>
             <div class="row justify-content-md-center">
                 <div class="col-md-12">
-                    <button mat-raised-button color="primary" type="submit" class="fill" (click)="save()" [disabled]="formCourse.invalid">Actualizar curso</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="save()" [disabled]="formCourse.invalid">Actualizar curso</button>
                 </div>
             </div>
 

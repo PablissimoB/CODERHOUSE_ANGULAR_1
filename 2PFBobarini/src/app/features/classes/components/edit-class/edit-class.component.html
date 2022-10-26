@@ -9,7 +9,7 @@
                     <mat-form-field appearance="fill" class="fill">
                         <mat-label>Nombre del Curso</mat-label>
                         <mat-select formControlName="idCourse">
-                        <mat-option *ngFor="let item of cursos" [value]="item.id">
+                        <mat-option *ngFor="let item of cursos$ | async" [value]="item.id">
                             {{item.nombre}} - {{item.profesor}}
                         </mat-option>
                         </mat-select>
@@ -36,7 +36,7 @@
             </div>
             <div class="row justify-content-md-center">
                 <div class="col-md-12">
-                    <button mat-raised-button color="primary" type="submit" class="fill" (click)="save()" [disabled]="formClass.invalid">Actualizar Clase</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="save()" [disabled]="formClass.invalid">Actualizar Clase</button>
                 </div>
             </div>
 

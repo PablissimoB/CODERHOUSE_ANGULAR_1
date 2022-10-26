@@ -25,7 +25,6 @@ export class AddStudentClassComponent implements OnInit {
   constructor(
     private claseService: ClassesService,
     private studentService: StudentsService,
-    private cursoService: CoursesService,
     private router: Router,
     private _Activatedroute:ActivatedRoute,
   ) { 
