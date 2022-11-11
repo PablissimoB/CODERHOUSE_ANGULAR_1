@@ -25,20 +25,21 @@ export class LoginComponent implements OnInit {
       contrasena: new FormControl('',[Validators.required])
   })
   this.usuarios$ = sesionService.obtenerDatos();
-  this.suscripcion = this.usuarios$.subscribe({
-    next: (usuario: Users[]) => {
-      this.usuariosCompletos = usuario;
-    },
-    error: (error) => {
-      console.error(error);
-    }
-  });
+
 }
 
   ngOnInit(): void {
+    this.suscripcion = this.usuarios$.subscribe({
+      next: (usuario: Users[]) => {
+        this.usuariosCompletos = usuario;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
   ngOnDestroy(): void{
-    this.suscripcion.unsubscribe();
+    
   }
 
   login(){
