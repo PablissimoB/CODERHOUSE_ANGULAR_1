@@ -2,7 +2,7 @@ import { Students } from './students';
 export interface Classes{
     id:number;
     idCourse: number;
-    idStudent: number[];
+    idStudents: number[];
     inicio: Date;
     fin: Date;
     deleted: boolean;

@@ -90,33 +90,41 @@ export class ClassesService {
   }
 
   eliminarAlumno(idE:number,idC:number){
-    let indice = this.clases.findIndex((c: Classes) => c.id ===idC)
-    if(indice > -1){
-      for( let i of this.clases[indice].idStudent){
-        if(i === idE){
-          const indice2 = this.clases[indice].idStudent.indexOf(i);
-          this.clases[indice].idStudent.splice(indice2,1);
-        }
+    let clase = this.obtenerId(idC);
+    console.log(clase);
+    let eliminar: boolean = false;
+    for(let i of clase!.idStudents) {
+      if(i == Number(idE) && clase != undefined){
+        let indice2 = clase.idStudents.indexOf(i);
+        clase?.idStudents.splice(Number(indice2),1);
+        eliminar=true;
       }
+      
     }
-    this.clasesSubject.next(this.clases);
+    if(eliminar){
+
+      this.http.put<Classes>(`${environment.api}/classes/${idC}`, clase).pipe(
+        catchError(this.manejarError)
+      ).subscribe();
+    }
   }
 
   agregarAlumno(idE:number,idC:number){
-    let indice = this.clases.findIndex((c: Classes) => c.id ===idC)
-    let agregar :boolean = true;
-    if(indice > -1){
-
-      for( let i of this.clases[indice].idStudent){
-        if(i === idE){
-          agregar=false;
-        }
-      }
-      if(agregar){
-        this.clases[indice].idStudent.push(idE);
+    let clase = this.obtenerId(idC);
+    let agregar: boolean = true;
+    for(let i of clase!.idStudents) {
+      if(i == Number(idE)){
+        agregar= false;
       }
     }
-    this.clasesSubject.next(this.clases);
+    if(agregar){
+      clase?.idStudents.push(Number(idE));
+      this.http.put<Classes>(`${environment.api}/classes/${idC}`, clase).pipe(
+        catchError(this.manejarError)
+      ).subscribe();
+    }
+
+     
   }
 
 

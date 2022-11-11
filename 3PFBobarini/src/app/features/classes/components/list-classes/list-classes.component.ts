@@ -7,6 +7,8 @@ import { Students } from '../../../../models/students';
 import { StudentsService } from '../../../students/services/students.service';
 import { CoursesService } from '../../../courses/services/courses.service';
 import { Course } from 'src/app/models/courses';
+import { Inscriptions } from '../../../../models/inscriptions';
+
 
 @Component({
   selector: 'app-list-classes',
@@ -20,6 +22,7 @@ export class ListClassesComponent implements OnInit {
   estudiantes$ !: Observable<Students[]>;
   cursos$!: Observable<Course[]>
   joinedCursos!:any;
+  joinedEstudiantes1!:Inscriptions[];
   joinedEstudiantes!:any;
   suscripcion!:any;
   available = 'available';
@@ -51,7 +54,7 @@ export class ListClassesComponent implements OnInit {
       next: (clases: Classes[]) => {
         this.clases = clases;
         this.crearClasesCursos();
-        this.crearArregloEstudiantes();
+        this.crearClasesEstudiantes();
       },
       error: (error) => {
         console.error(error);
@@ -81,7 +84,7 @@ export class ListClassesComponent implements OnInit {
       of(this.crearArregloEstudiantes()),this.estudiantes$
     ]).subscribe(([arrayOne, arrayTwo]) => {
       this.joinedEstudiantes = arrayOne.map(item => ({
-        ...arrayTwo.find(t => t.idStudent === item.idEstudiante),
+        ...arrayTwo.find(t => Number(t.idStudent) === Number(item.idStudent)),
         ...item
       }));
     });
@@ -89,23 +92,23 @@ export class ListClassesComponent implements OnInit {
 
 
   crearArregloEstudiantes(){
+
     let clasesEstudiantes =[
       {
-        idEstudiante:0,
+        idStudent:0,
         idClase:0
       }
     ];
     for(let i of this.clases){
-      for(let x of i.idStudent){
+      for(let x of i.idStudents){
         clasesEstudiantes.push(
           {
-            idEstudiante: Number(x),
+            idStudent: x,
             idClase: i.id
           }
          );
       }
     }
-    console.log(clasesEstudiantes);
     return clasesEstudiantes;
   }
 

@@ -42,7 +42,7 @@ export class AddStudentClassComponent implements OnInit {
   }
 
 agregar(id:number){
-  
+  this.claseService.agregarAlumno(id, this.id);
   this.router.navigate(['features/clases'])
 
 }

@@ -52,7 +52,7 @@ export class EditClassComponent implements OnInit {
     let c: Classes ={
       id : this.id,
       idCourse: this.formClass.value.idCourse,
-      idStudent: this.idEstudiantes,
+      idStudents: this.idEstudiantes,
       inicio:this.formClass.value.inicio,
       fin:this.formClass.value.fin,
       deleted: false,
