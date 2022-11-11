@@ -73,7 +73,7 @@ export class ListClassesComponent implements OnInit {
       this.clases$,this.cursos$
     ]).subscribe(([arrayOne, arrayTwo]) => {
       this.joinedCursos = arrayOne.map(item => ({
-        ...arrayTwo.find(t => Number(t.id) === item.idCourse),
+        ...arrayTwo.find(t => Number(t.id) === Number(item.idCourse)),
         ...item
       }));
     });
@@ -116,6 +116,20 @@ export class ListClassesComponent implements OnInit {
     if(confirm("Esta seguro de eliminar el elemento id: "+id)) {
       this.claseService.eliminar(id);
     }
+    this.clases$ = this.claseService.obtener().pipe(
+      map((item: Classes[]) => item.filter((item: Classes) => item.deleted ==false))
+      );
+    this.suscripcion = this.clases$.subscribe({
+      next: (clases: Classes[]) => {
+        this.clases = clases;
+        this.crearClasesCursos();
+        this.crearClasesEstudiantes();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
   }
 
   editar(id: number){
@@ -129,8 +143,19 @@ export class ListClassesComponent implements OnInit {
   eliminarEstudiante(idE: number, idC:number){
     if(confirm("Esta seguro de eliminar el estudiante id: "+idE +" del curso id: "+idC)) {
       this.claseService.eliminarAlumno(idE, idC);
-    }
-    this.crearClasesEstudiantes();
   }
-
+  this.clases$ = this.claseService.obtener().pipe(
+    map((item: Classes[]) => item.filter((item: Classes) => item.deleted ==false))
+    );
+  this.suscripcion = this.clases$.subscribe({
+    next: (clases: Classes[]) => {
+      this.clases = clases;
+      this.crearClasesCursos();
+      this.crearClasesEstudiantes();
+    },
+    error: (error) => {
+      console.error(error);
+    }
+  });
+}
 }

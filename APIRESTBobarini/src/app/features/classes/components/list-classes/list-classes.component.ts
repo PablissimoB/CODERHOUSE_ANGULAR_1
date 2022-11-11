@@ -56,7 +56,6 @@ export class ListClassesComponent implements OnInit {
   ngOnInit(): void {
       this.crearClasesCursos();
       this.crearClasesEstudiantes();
-      console.log(this.joinedCursos);
   }
   
 
@@ -110,6 +109,16 @@ export class ListClassesComponent implements OnInit {
     if(confirm("Esta seguro de eliminar el elemento id: "+id)) {
       this.claseService.eliminar(id);
     }
+    this.suscripcion = this.clases$.subscribe({
+      next: (clases: Classes[]) => {
+        this.clases = clases;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+    this.crearClasesCursos();
+    this.crearClasesEstudiantes();
   }
 
   editar(id: number){

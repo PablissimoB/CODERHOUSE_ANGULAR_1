@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UsersService } from './users.service';
-import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('Servicios de Usuario', () => {
   let httpClientSpy: { get: jasmine.Spy };
@@ -28,7 +27,7 @@ describe('Servicios de Usuario', () => {
 
       const mockDatos2: any = [{"nombre":"prueba","contrasena":"1234","id":"2"},
       {"nombre":"Pablo","contrasena":"1234","id":"4"},
-      {"nombre":"Aurelio12","contrasena":"1234","id":"5"}]   ;
+      {"nombre":"Gonzalez","contrasena":"1234","id":"5"}]   ;
 
       expect(usuarios).toEqual(mockDatos2);
       done();
