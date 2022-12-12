@@ -1,1 +1,10 @@
-<p>list-courses works!</p>
+<div *ngIf="(cargando$ | async)">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!(cargando$ | async)">
+<p>
+    
+{{courses$ | async | json}}
+</p>
+</div>

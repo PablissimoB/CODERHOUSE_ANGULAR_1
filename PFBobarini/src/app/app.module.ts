@@ -7,10 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { CoreModule } from './core/core.module';
+import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
+import { SideMenuComponent } from './core/components/side-menu/side-menu.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +24,9 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

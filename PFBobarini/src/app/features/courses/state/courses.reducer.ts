@@ -1,21 +1,25 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { CourseState } from 'src/app/models/course.state';
 import * as CoursesActions from './courses.actions';
 
 export const coursesFeatureKey = 'courses';
 
-export interface State {
-
-}
-
-export const initialState: State = {
-
+export const courseState: CourseState = {
+  loading: false,
+  courses: []
 };
 
 export const reducer = createReducer(
-  initialState,
+  courseState,
 
-  on(CoursesActions.loadCourses, state => state),
-  on(CoursesActions.loadCoursesSuccess, (state, action) => state),
-  on(CoursesActions.loadCoursesFailure, (state, action) => state),
+  on(CoursesActions.loadCourses, (state) => {
+    return {...state, loading: true }
+  }),
+  on(CoursesActions.loadCoursesSuccess, (state, {courses}) => {
+    return {...state, loading: false, courses}
+}),
+  on(CoursesActions.loadCoursesFailure, (state, {error}) => {
+    return state
+  }),
 
 );

@@ -6,6 +6,11 @@ import { AddCoursesComponent } from './components/add-courses/add-courses.compon
 import { EditCoursesComponent } from './components/edit-courses/edit-courses.component';
 import { ListCoursesComponent } from './components/list-courses/list-courses.component';
 import { InitCoursesComponent } from './components/init-courses/init-courses.component';
+import { StoreModule } from '@ngrx/store';
+import { coursesFeatureKey, reducer } from './state/courses.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './state/courses.effects';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +22,10 @@ import { InitCoursesComponent } from './components/init-courses/init-courses.com
   ],
   imports: [
     CommonModule,
-    CoursesRoutingModule
+    StoreModule.forFeature(coursesFeatureKey, reducer),
+    EffectsModule.forFeature([CoursesEffects]),
+    CoursesRoutingModule,
+    SharedModule
   ]
 })
 export class CoursesModule { }

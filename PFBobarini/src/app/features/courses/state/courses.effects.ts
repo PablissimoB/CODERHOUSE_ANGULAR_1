@@ -1,26 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import * as CoursesActions from './courses.actions';
+import { CoursesService } from '../services/courses.service';
+import { loadCoursesSuccess } from './courses.actions';
 
 
 @Injectable()
 export class CoursesEffects {
 
-  loadCourses$ = createEffect(() => {
-    return this.actions$.pipe( 
+  constructor(private actions$: Actions,
+    private courseService: CoursesService) {}
 
-      ofType(CoursesActions.loadCourses),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => CoursesActions.loadCoursesSuccess({ data })),
-          catchError(error => of(CoursesActions.loadCoursesFailure({ error }))))
-      )
-    );
-  });
+ loadCourses$ = createEffect(
+    () => {return this.actions$.pipe(
+          ofType(CoursesActions.loadCourses),
+          mergeMap(
+            () => this.courseService.getAll().pipe(
+              map(data => CoursesActions.loadCoursesSuccess({courses: data })),
+              catchError(err => of(CoursesActions.loadCoursesFailure({error:err})))
+            ))
+          )
+        });
 
 
-  constructor(private actions$: Actions) {}
+  
 }
