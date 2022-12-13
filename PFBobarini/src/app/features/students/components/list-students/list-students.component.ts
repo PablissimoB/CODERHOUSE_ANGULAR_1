@@ -7,8 +7,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Students } from 'src/app/models/students';
 import { StudentState } from '../../../../models/student.state';
-import { loadStudents } from '../../state/students.actions';
+import { loadStudents, deleteStudent } from '../../state/students.actions';
 import { selectStateCargando, selectStateEstudiantes } from '../../state/students.selectors';
+import { EditStudentComponent } from '../edit-student/edit-student.component';
+import { ViewStudentComponent } from '../view-student/view-student.component';
 
 @Component({
   selector: 'app-list-students',
@@ -48,13 +50,23 @@ export class ListStudentsComponent {
 
   eliminar(id: number){
     if(confirm("Esta seguro de eliminar el elemento id: "+id)) {
-
+      this.store.dispatch(deleteStudent({id}));
     }
   }
-  editar(id: number){
-    this.router.navigate(['features/estudiantes/edit',{id:id}]);
+  editar(student:Students){
+    this.dialog.open(EditStudentComponent,
+      {
+        width: '550px',
+        data: student
+      }
+    )
   }
-  consultar(id: number){
-
+  consultar(student:Students){
+    this.dialog.open(ViewStudentComponent,
+      {
+        width: '550px',
+        data: student
+      }
+    )
   }
 }

@@ -21,5 +21,13 @@ export const reducer = createReducer(
   on(StudentsActions.loadStudentsFailure, (state, {error}) => {
     return state
   }),
-
+  on(StudentsActions.addStudent, (state, {student}) => {
+    return state
+  }),
+  on(StudentsActions.editStudent, (state, {student}) => {
+    return state
+  }),
+  on(StudentsActions.deleteStudent, (state, {id}) => {
+    return state
+  }),
 );

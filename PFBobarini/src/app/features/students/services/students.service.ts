@@ -40,34 +40,16 @@ export class StudentsService {
     return resultado;
   }
 
-  add(estudiante: Students){
-    this.http.post(`${environment.api}/students/`, estudiante, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.manejarError)
-    ).subscribe();
+  add(estudiante: Students): Observable<Students>{
+    return this.http.post<Students>(`${environment.api}/students`, estudiante);
   }
 
   delete(id:number){
-    const estudiante = this.getId(id);
-    if(estudiante ==undefined){
-      console.log("error");
-    }
-    else{
-      this.http.delete<Students>(`${environment.api}/students/${id}`).pipe(
-        catchError(this.manejarError)
-      ).subscribe();
-    }
-    
+    return this.http.delete<Students>(`${environment.api}/students/${id}`);
   }
 
   edit(estudiante: Students){
-    this.http.put<Students>(`${environment.api}/students/${estudiante.idStudent}`, estudiante).pipe(
-      catchError(this.manejarError)
-    ).subscribe();
+    return this.http.put<Students>(`${environment.api}/students/${estudiante.idStudent}`, estudiante);
   }
 
   private manejarError(error: HttpErrorResponse){

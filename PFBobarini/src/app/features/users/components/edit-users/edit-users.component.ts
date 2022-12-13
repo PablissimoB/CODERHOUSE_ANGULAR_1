@@ -14,8 +14,7 @@ import { editUser } from '../../state/user.actions';
 })
 export class EditUsersComponent {
 
-  cursos$!: Observable<Users[]>;
-  id!:number;
+  
   formulario!: FormGroup;
 
   constructor(
