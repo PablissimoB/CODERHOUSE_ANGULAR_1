@@ -19,7 +19,6 @@ export class EditCoursesComponent {
   
   
   cursos$!: Observable<Course[]>;
-  id!:number;
   formulario!: FormGroup;
 
   constructor(

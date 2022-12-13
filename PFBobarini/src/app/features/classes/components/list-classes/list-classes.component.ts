@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ClassesState } from '../../state/classes.reducer';
-import { loadClasses } from '../../state/classes.actions';
+import { loadClasses, deleteClasses } from '../../state/classes.actions';
 import { selectStateCargando, selectStateClases } from '../../state/classes.selectors';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, map } from 'rxjs';
 import { Classes } from 'src/app/models/classes';
 import { Course } from 'src/app/models/courses';
 import { Students } from 'src/app/models/students';
@@ -14,13 +14,16 @@ import { loadCourses } from '../../../courses/state/courses.actions';
 import { loadStudents } from '../../../students/state/students.actions';
 import { selectStateEstudiantes } from '../../../students/state/students.selectors';
 import { selectStateCursos } from '../../../courses/state/courses.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { EditClassesComponent } from '../edit-classes/edit-classes.component';
+import { Datos } from '../../../../models/auxiliar';
 
 @Component({
   selector: 'app-list-classes',
   templateUrl: './list-classes.component.html',
   styleUrls: ['./list-classes.component.css']
 })
-export class ListClassesComponent implements OnInit{
+export class ListClassesComponent implements OnInit, OnDestroy{
 
   panelOpenState = false;
   clases$!:Observable<Classes[]>;
@@ -43,6 +46,8 @@ export class ListClassesComponent implements OnInit{
     private store: Store <ClassesState>,
     private storeC: Store <CourseState>,
     private storeS: Store <StudentState>,
+    private dialog: MatDialog
+    
   )
   {
     this.store.dispatch(loadClasses());
@@ -65,13 +70,16 @@ export class ListClassesComponent implements OnInit{
           this.clases = clases;
           this.crearClasesCursos();
           this.crearClasesEstudiantes();
-          console.log(this.joinedCursos);
-          console.log(this.joinedEstudiantes);
+
         },
         error: (error) => {
           console.error(error);
         }
       });
+  }
+
+  ngOnDestroy(){
+    this.suscripcion.unsubscribe();
   }
 
   crearClasesCursos(){
@@ -119,12 +127,19 @@ export class ListClassesComponent implements OnInit{
 
   eliminar(id: number){
     if(confirm("Esta seguro de eliminar el elemento id: "+id)) {
-
+      this.store.dispatch(deleteClasses({id}));
     }
   }
 
   editar(id: number){
-    this.router.navigate(['features/clases/edit',{id:id}]);
+
+    let auxiliar:any = this.joinedCursos.filter((a: Classes) => a.id ==id);
+
+    this.dialog.open(EditClassesComponent, {
+      width: '600px',
+      data: auxiliar
+    })
+    
   }
 
   agregarEstudiante(id:number, curso:string){

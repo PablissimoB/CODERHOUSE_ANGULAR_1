@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddStudentComponent } from '../add-student/add-student.component';
 
 @Component({
   selector: 'app-init-students',
@@ -6,12 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./init-students.component.css']
 })
 export class InitStudentsComponent {
-  constructor()
+  constructor(
+    private dialog3: MatDialog
+  )
   {
 
   }
 
   ngOnInit(): void {
     
+  }
+  agregarEstudiante(){
+    this.dialog3.open(AddStudentComponent,
+      {
+        width: '600px',
+      }
+
+    )
   }
 }

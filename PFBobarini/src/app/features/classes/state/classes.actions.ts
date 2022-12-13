@@ -15,7 +15,7 @@ export const loadClassesFailure = createAction(
   props<{ error: any }>()
 );
 
-export const creeateClasses = createAction(
+export const addClasses = createAction(
   '[Classes] Create Class',
   props<{ classes: Classes }>()
 );
@@ -27,5 +27,5 @@ export const editClasses = createAction(
 
 export const deleteClasses = createAction(
   '[Classes] Delete Classes',
-  props<{ classes: Classes }>()
+  props<{ id: number }>()
 );

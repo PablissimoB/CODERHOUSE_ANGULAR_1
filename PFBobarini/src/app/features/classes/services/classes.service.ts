@@ -25,7 +25,7 @@ export class ClassesService {
     return this.http.put<Classes>(`${environment.api}/classes/${clase.id}`, clase);
   }
 
-  delete(clase: Classes): Observable<Classes>{
-    return this.http.delete<Classes>(`${environment.api}/classes/${clase.id}`);
+  delete(id: number): Observable<Classes>{
+    return this.http.delete<Classes>(`${environment.api}/classes/${id}`);
   }
 }

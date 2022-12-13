@@ -20,7 +20,7 @@ export const reducer = createReducer(
   on(ClassesActions.loadClasses, state => {return {...state, loading: true}}),
   on(ClassesActions.loadClassesSuccess, (state, {classes}) => {return {...state, loading: false, classes:classes }}),
   on(ClassesActions.loadClassesFailure, (state, {error}) => {return {...state, loading: false, error:error }}),
-  on(ClassesActions.creeateClasses, (state, {classes}) => {return state}),
+  on(ClassesActions.addClasses, (state, {classes}) => {return state}),
   on(ClassesActions.editClasses, (state, {classes}) => {return state}),
-  on(ClassesActions.deleteClasses, (state, {classes}) => {return state}),
+  on(ClassesActions.deleteClasses, (state, {id}) => {return state}),
 );
