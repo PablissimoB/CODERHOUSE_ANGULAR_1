@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Students } from 'src/app/models/students';
 
 export const loadStudents = createAction(
   '[Students] Load Students'
@@ -6,7 +7,7 @@ export const loadStudents = createAction(
 
 export const loadStudentsSuccess = createAction(
   '[Students] Load Students Success',
-  props<{ data: any }>()
+  props<{ students: Students[] }>()
 );
 
 export const loadStudentsFailure = createAction(

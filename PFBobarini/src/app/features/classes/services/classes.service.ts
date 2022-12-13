@@ -13,7 +13,7 @@ export class ClassesService {
     private http: HttpClient
   ) { }
 
-  get(): Observable<Classes[]>{
+  getAll(): Observable<Classes[]>{
     return this.http.get<Classes[]>(`${environment.api}/classes`);
   }
 

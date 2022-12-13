@@ -1,21 +1,25 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { StudentState } from 'src/app/models/student.state';
 import * as StudentsActions from './students.actions';
 
 export const studentsFeatureKey = 'students';
 
-export interface State {
-
-}
-
-export const initialState: State = {
-
+export const studentlState: StudentState = {
+  loading: false,
+  students: []
 };
 
 export const reducer = createReducer(
-  initialState,
+  studentlState,
 
-  on(StudentsActions.loadStudents, state => state),
-  on(StudentsActions.loadStudentsSuccess, (state, action) => state),
-  on(StudentsActions.loadStudentsFailure, (state, action) => state),
+  on(StudentsActions.loadStudents,  (state) => {
+    return {...state, loading: true }
+  }),
+  on(StudentsActions.loadStudentsSuccess, (state, {students}) => {
+    return {...state, loading: false, students}
+}),
+  on(StudentsActions.loadStudentsFailure, (state, {error}) => {
+    return state
+  }),
 
 );

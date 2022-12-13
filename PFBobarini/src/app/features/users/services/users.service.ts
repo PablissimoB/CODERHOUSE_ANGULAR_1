@@ -18,14 +18,6 @@ export class UsersService {
 
     
     this.usuariosSubject = new BehaviorSubject<Users[]>(this.usuarios);
-    this.obtenerUsuarios().subscribe({
-      next: (data: Users[]) => {
-        this.usuarios = data;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-  });
   }
 
   
@@ -66,29 +58,16 @@ export class UsersService {
     let resultado = this.usuarios.find(x => x.id == id);
     return resultado;
   }
-  agregarUsuario(item: Users){
-    this.http.post(`${environment.api}/users/`, item, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
+  add(item: Users): Observable<Users>{
+    return this.http.post<Users>(`${environment.api}/users`, item);
   }
 
-  eliminarUsuario(nombre:string){
-    const usuario = this.obtenerUsuarioNombre(nombre);
-
-    this.http.delete<Users>(`${environment.api}/users/${usuario?.id}`).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
-    
+  delete(id:number): Observable<Users>{
+    return this.http.delete<Users>(`${environment.api}/users/${id}`);
   }
-  editarUsuario(item: Users){
-    this.http.put<Users>(`${environment.api}/users/${item?.id}`, item).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
+
+  edit(item: Users): Observable<Users>{
+    return this.http.put<Users>(`${environment.api}/users/${item.id}`, item);
   }
 
 

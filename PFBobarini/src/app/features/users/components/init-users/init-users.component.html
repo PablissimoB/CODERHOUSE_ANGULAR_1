@@ -1,1 +1,11 @@
-<p>init-users works!</p>
+<div class="container">
+    <h2>Usuarios</h2>
+    <hr>
+    <button mat-fab color="accent" (click)="agregarUsuario()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-fab color="accent" routerLink="/features/usuarios">
+        <mat-icon>search</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+</div>

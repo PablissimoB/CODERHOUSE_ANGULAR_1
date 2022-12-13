@@ -21,5 +21,13 @@ export const reducer = createReducer(
   on(CoursesActions.loadCoursesFailure, (state, {error}) => {
     return state
   }),
-
+  on(CoursesActions.addCourse, (state, {course}) => {
+    return state
+  }),
+  on(CoursesActions.editCourse, (state, {course}) => {
+    return state
+  }),
+  on(CoursesActions.deleteCourse, (state, {id}) => {
+    return state
+  }),
 );

@@ -1,6 +1,6 @@
 import { Students } from "./students";
 
-export interface CourseState{
+export interface StudentState{
     loading: boolean;
-    estudiantes: Students[];
+    students: Students[];
 }

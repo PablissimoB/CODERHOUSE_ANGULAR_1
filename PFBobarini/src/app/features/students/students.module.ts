@@ -6,6 +6,11 @@ import { AddStudentComponent } from './components/add-student/add-student.compon
 import { EditStudentComponent } from './components/edit-student/edit-student.component';
 import { ListStudentsComponent } from './components/list-students/list-students.component';
 import { InitStudentsComponent } from './components/init-students/init-students.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StudentsEffects } from './state/students.effects';
+import { studentsFeatureKey, reducer } from './state/students.reducer';
 
 
 @NgModule({
@@ -17,7 +22,10 @@ import { InitStudentsComponent } from './components/init-students/init-students.
   ],
   imports: [
     CommonModule,
-    StudentsRoutingModule
+    StoreModule.forFeature(studentsFeatureKey, reducer),
+    EffectsModule.forFeature([StudentsEffects]),
+    StudentsRoutingModule,
+    SharedModule
   ]
 })
 export class StudentsModule { }

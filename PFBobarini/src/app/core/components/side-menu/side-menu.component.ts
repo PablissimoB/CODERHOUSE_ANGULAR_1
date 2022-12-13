@@ -13,6 +13,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   sesion !: Sesion;
   suscripcion:any;
+  kindUser: any;
 
   constructor(
     private sesionService: SessionService,
@@ -21,6 +22,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     this.suscripcion = this.sesionService.obtenerSesion().subscribe({
       next: (sesion: Sesion) => {
         this.sesion = sesion;
+        this.kindUser =  sesion.usuarioActivo?.admin;
         
       },
       error: (error) => {

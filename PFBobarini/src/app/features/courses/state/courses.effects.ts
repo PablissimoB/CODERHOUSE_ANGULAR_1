@@ -4,7 +4,7 @@ import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import * as CoursesActions from './courses.actions';
 import { CoursesService } from '../services/courses.service';
-import { loadCoursesSuccess } from './courses.actions';
+import { Course } from 'src/app/models/courses';
 
 
 @Injectable()
@@ -24,6 +24,30 @@ export class CoursesEffects {
           )
         });
 
+ addCourses$ = createEffect(
+    () => {return this.actions$.pipe(
+          ofType(CoursesActions.addCourse),
+          concatMap(({ course }) => this.courseService.add(course).pipe(
+            map((data: Course) => CoursesActions.loadCourses())
+          ))
+          )
+    });
+  editCourses$ = createEffect(
+    () => {return this.actions$.pipe(
+          ofType(CoursesActions.editCourse),
+          concatMap(({ course }) => this.courseService.edit(course).pipe(
+            map((data: Course) => CoursesActions.loadCourses())
+          ))
+          )
+    });
+  deleteCourses$ = createEffect(
+    () => {return this.actions$.pipe(
+          ofType(CoursesActions.deleteCourse),
+          concatMap(({ id }) => this.courseService.delete(id).pipe(
+            map((data: Course) => CoursesActions.loadCourses())
+          ))
+          )
+    });
 
-  
+
 }

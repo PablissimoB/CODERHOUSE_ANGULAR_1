@@ -6,6 +6,11 @@ import { AddUsersComponent } from './components/add-users/add-users.component';
 import { EditUsersComponent } from './components/edit-users/edit-users.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { InitUsersComponent } from './components/init-users/init-users.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { UserEffects } from './state/user.effects';
+import { userFeatureKey, reducer } from './state/user.reducer';
 
 
 @NgModule({
@@ -17,7 +22,10 @@ import { InitUsersComponent } from './components/init-users/init-users.component
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    StoreModule.forFeature(userFeatureKey, reducer),
+    EffectsModule.forFeature([UserEffects]),
+    UsersRoutingModule,
+    SharedModule
   ]
 })
 export class UsersModule { }

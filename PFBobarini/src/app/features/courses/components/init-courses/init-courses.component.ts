@@ -1,12 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { CourseState } from 'src/app/models/course.state';
-import { Course } from '../../../../models/courses';
-import { CoursesService } from '../../services/courses.service';
-import { loadCoursesSuccess, loadCoursesFailure, loadCourses } from '../../state/courses.actions';
-import { selectStateCargando, selectStateCursos } from '../../state/courses.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCoursesComponent } from '../add-courses/add-courses.component';
 
 @Component({
   selector: 'app-init-courses',
@@ -18,7 +12,7 @@ export class InitCoursesComponent implements OnInit{
 
 
   constructor(
-    
+    private dialog: MatDialog
   )
   {
     
@@ -28,5 +22,14 @@ export class InitCoursesComponent implements OnInit{
   ngOnInit(): void {
 
     
+  }
+
+  agregarCurso(){
+    this.dialog.open(AddCoursesComponent,
+      {
+        width: '550px',
+      }
+
+    )
   }
 }

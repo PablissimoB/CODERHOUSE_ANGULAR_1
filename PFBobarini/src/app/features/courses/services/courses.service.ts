@@ -16,14 +16,7 @@ export class CoursesService {
     private http: HttpClient
   ) { 
     this.coursesSubject = new BehaviorSubject<Course[]>(this.cursos);
-    this.getAll().subscribe({
-        next: (data: Course[]) => {
-          this.cursos = data;
-        },
-        error: (error) => {
-          console.error(error);
-        }
-    });
+
     }
 
      getAll(): Observable<Course[]>{
@@ -49,35 +42,15 @@ export class CoursesService {
     return resultado;
   }
 
-  add(curso: Course){
-    this.http.post(`${environment.api}/courses/`, curso, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
+  add(curso: Course): Observable<Course> {
+    return this.http.post<Course>(`${environment.api}/courses`, curso);
   }
 
-  delete(id:number){
-    const curso = this.getId(id);
-    if(curso == undefined){
-
-    }
-    else{
-      curso.deleted = true;
-    }
-
-    this.http.put<Course>(`${environment.api}/courses/${id}`, curso).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
-    
+  delete(id:number): Observable<Course>{
+    return this.http.delete<Course>(`${environment.api}/courses/${id}`);
   }
-  edit(curso: Course){
-    this.http.put<Course>(`${environment.api}/courses/${curso.id}`, curso).pipe(
-      catchError(this.manejarError)
-    ).subscribe(console.log);
+  edit(curso: Course): Observable<Course>{
+    return this.http.put<Course>(`${environment.api}/courses/${curso.id}`, curso);
   }
 
   private manejarError(error: HttpErrorResponse){

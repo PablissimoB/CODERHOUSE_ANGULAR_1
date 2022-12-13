@@ -9,13 +9,18 @@ import { ClassesService } from '../services/classes.service';
 @Injectable()
 export class ClassesEffects {
 
+
+  constructor(private actions$: Actions,
+    private services: ClassesService
+    ) {}
+    
   loadClassess$ = createEffect(() => {
     return this.actions$.pipe( 
 
       ofType(ClassesActions.loadClasses),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        this.services.get().pipe(
+        this.services.getAll().pipe(
           map(classes => ClassesActions.loadClassesSuccess({ classes })),
           catchError(error => of(ClassesActions.loadClassesFailure({ error }))))
       )
@@ -23,7 +28,5 @@ export class ClassesEffects {
   });
 
 
-  constructor(private actions$: Actions,
-    private services: ClassesService
-    ) {}
+
 }
