@@ -71,7 +71,7 @@ export class EditClassesComponent {
       deleted: false,
       available: this.datos[0].available,
     }
-    console.log(JSON.stringify(c));
+    
     this.store.dispatch(editClasses({classes: c}));
     this.dialogRef1.close();
   }

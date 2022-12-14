@@ -28,4 +28,6 @@ export class ClassesService {
   delete(id: number): Observable<Classes>{
     return this.http.delete<Classes>(`${environment.api}/classes/${id}`);
   }
+
+  
 }

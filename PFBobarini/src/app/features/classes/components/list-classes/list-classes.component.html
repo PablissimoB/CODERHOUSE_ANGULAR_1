@@ -36,7 +36,7 @@
                     <ng-container *ngFor="let item2 of joinedEstudiantes">
                         <div class="col-md-6" *ngIf="item2.idClase === item.id && item2.idClase !==0">
                           Dni: {{item2.dni}} - {{item2.apellido | uppercase}}, {{item2.nombre}}
-                          <button mat-icon-button (click)="eliminarEstudiante(item2.idStudent, item.id)">
+                          <button mat-icon-button (click)="eliminarEstudiante(item2.idStudent, item.id)" *ngIf="item.available ==true">
                             <mat-icon color="warn">delete</mat-icon>
                           </button>
                         </div>

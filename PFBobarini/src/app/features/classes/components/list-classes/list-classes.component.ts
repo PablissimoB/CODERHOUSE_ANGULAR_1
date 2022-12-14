@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ClassesState } from '../../state/classes.reducer';
-import { loadClasses, deleteClasses } from '../../state/classes.actions';
+import { loadClasses, deleteClasses, editClasses } from '../../state/classes.actions';
 import { selectStateCargando, selectStateClases } from '../../state/classes.selectors';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -31,11 +31,14 @@ export class ListClassesComponent implements OnInit, OnDestroy{
   cargando1$!: Observable<boolean>;
   cargando2$!: Observable<boolean>;
   clases!:Classes[];
+  clasesAux!:Classes[];
   estudiantes$ !: Observable<Students[]>;
   cursos$!: Observable<Course[]>
   joinedCursos!:any;
   joinedEstudiantes!:any;
+  aux$!:Observable<Classes[]>;
   suscripcion!:any;
+
   available = 'available';
   unavailable = 'unavailable';
   mostrar='mostrar';
@@ -68,6 +71,7 @@ export class ListClassesComponent implements OnInit, OnDestroy{
       this.suscripcion = this.clases$.subscribe({
         next: (clases: Classes[]) => {
           this.clases = clases;
+          this.clasesAux = clases;
           this.crearClasesCursos();
           this.crearClasesEstudiantes();
 
@@ -76,6 +80,8 @@ export class ListClassesComponent implements OnInit, OnDestroy{
           console.error(error);
         }
       });
+
+
   }
 
   ngOnDestroy(){
@@ -146,7 +152,40 @@ export class ListClassesComponent implements OnInit, OnDestroy{
     this.router.navigate(['features/clases/addStudent',{id:id,curso:curso}]);
   }
   eliminarEstudiante(idE: number, idC:number){
+    
+    
     if(confirm("Esta seguro de eliminar el estudiante id: "+idE +" del curso id: "+idC)) {
+
+
+      let c : Classes
+      let clase1 = this.clasesAux.find(x => x.id == idC);
+      if(clase1 != undefined){
+
+
+        c = {
+          id: clase1?.id,
+          idCourse: clase1?.idCourse,
+          idStudents: [],
+          inicio: clase1?.inicio,
+          fin: clase1?.fin,
+          deleted: false,
+          available: true
+        }
+
+
+        for(let i of clase1!.idStudents) {
+          if(i != Number(idE)){
+            let indice2 = clase1.idStudents.findIndex(x => x === i);
+            c.idStudents.push(i);
+            
+          }
+          
+        }
+        this.store.dispatch(editClasses({classes: c}));
+      }
+       
+      
+      
     }
 
   }
