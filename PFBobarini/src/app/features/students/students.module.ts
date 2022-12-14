@@ -11,7 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StudentsEffects } from './state/students.effects';
 import { studentsFeatureKey, reducer } from './state/students.reducer';
-import { ViewStudentComponent } from './components/view-student/view-student.component';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { ViewStudentComponent } from './components/view-student/view-student.com
     AddStudentComponent,
     EditStudentComponent,
     ListStudentsComponent,
-    InitStudentsComponent,
-    ViewStudentComponent
+    InitStudentsComponent
   ],
   imports: [
     CommonModule,

@@ -13,7 +13,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   sesion !: Sesion;
   suscripcion:any;
-  kindUser: any;
+  admin: any;
 
   constructor(
     private sesionService: SessionService,
@@ -22,7 +22,11 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     this.suscripcion = this.sesionService.obtenerSesion().subscribe({
       next: (sesion: Sesion) => {
         this.sesion = sesion;
-        this.kindUser =  sesion.usuarioActivo?.admin;
+        if(sesion.usuarioActivo != undefined){
+          this.admin = sesion.usuarioActivo?.admin;
+          console.log(this.admin);
+        }
+        
         
       },
       error: (error) => {
@@ -41,4 +45,17 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void{
     this.suscripcion.unsubscribe();
   }
+
+  irUsuario(){
+    console.log(this.admin);
+    if(this.admin ==false || this.admin == undefined){
+      alert("Usted no tiene permisos para ingresar a la opción.");
+    }
+    else{
+      this.router.navigate(['features/usuarios']);
+    }
+
+    
+  }
+
 }

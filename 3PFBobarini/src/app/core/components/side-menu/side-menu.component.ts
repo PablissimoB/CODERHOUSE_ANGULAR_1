@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Sesion } from 'src/app/models/sessions';
+import { SessionService } from '../../authentication/services/session.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor() { }
+  sesion !: Sesion;
+  suscripcion:any;
+  admin: boolean=false;
+
+  
+  constructor(
+    private sesionService: SessionService,
+  ) { 
+
+    this.suscripcion = this.sesionService.obtenerSesion().subscribe({
+      next: (sesion: Sesion) => {
+        this.sesion = sesion;
+        
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+  }
 
   ngOnInit(): void {
+    this.suscripcion.unsubscribe();
   }
 
 }

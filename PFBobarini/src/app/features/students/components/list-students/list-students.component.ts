@@ -10,7 +10,7 @@ import { StudentState } from '../../../../models/student.state';
 import { loadStudents, deleteStudent } from '../../state/students.actions';
 import { selectStateCargando, selectStateEstudiantes } from '../../state/students.selectors';
 import { EditStudentComponent } from '../edit-student/edit-student.component';
-import { ViewStudentComponent } from '../view-student/view-student.component';
+
 
 @Component({
   selector: 'app-list-students',
@@ -61,12 +61,5 @@ export class ListStudentsComponent {
       }
     )
   }
-  consultar(student:Students){
-    this.dialog.open(ViewStudentComponent,
-      {
-        width: '550px',
-        data: student
-      }
-    )
-  }
+
 }
