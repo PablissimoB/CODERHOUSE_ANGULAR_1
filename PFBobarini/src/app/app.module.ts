@@ -11,6 +11,8 @@ import { CoreModule } from './core/core.module';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { SideMenuComponent } from './core/components/side-menu/side-menu.component';
 import { SharedModule } from './shared/shared.module';
+import { ROOT_REDUCERS } from './core/app.state';
+import { FeaturesModule } from './features/features.module';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,11 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(ROOT_REDUCERS),
     EffectsModule.forRoot([]),
     CoreModule,
-    SharedModule
+    SharedModule,
+    FeaturesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

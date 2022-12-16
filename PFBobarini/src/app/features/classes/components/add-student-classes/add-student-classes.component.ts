@@ -62,7 +62,7 @@ export class AddStudentClassesComponent implements OnDestroy{
       let clase1 = this.clasesAux.find(x => x.id == this.id);
       
       if(clase1 != undefined){
-        console.log(clase1);
+        
 
         c = {
           id: clase1.id,
@@ -83,7 +83,7 @@ export class AddStudentClassesComponent implements OnDestroy{
           
         }
         c.idStudents.push(id);
-        console.log(c);
+        
         this.store.dispatch(editClasses({classes: c}));
       }
 

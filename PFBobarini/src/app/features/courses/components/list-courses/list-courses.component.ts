@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/core/app.state';
 import { CourseState } from 'src/app/models/course.state';
 import { Course } from 'src/app/models/courses';
 import { deleteCourse, loadCourses } from '../../state/courses.actions';
@@ -22,7 +23,7 @@ export class ListCoursesComponent {
   
   constructor(
     private router: Router,
-    private store: Store <CourseState>,
+    private store: Store <AppState>,
     private dialog: MatDialog
   )
   {

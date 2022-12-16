@@ -9,7 +9,7 @@ export const studentlState: StudentState = {
   students: []
 };
 
-export const reducer = createReducer(
+export const reducerStudent = createReducer(
   studentlState,
 
   on(StudentsActions.loadStudents,  (state) => {

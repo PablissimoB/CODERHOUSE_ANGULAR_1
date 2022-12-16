@@ -10,7 +10,7 @@ export const userState: UserState = {
   users: []
 };
 
-export const reducer = createReducer(
+export const reducerUser = createReducer(
   userState,
 
   on(UserActions.loadUsers,  (state) => {

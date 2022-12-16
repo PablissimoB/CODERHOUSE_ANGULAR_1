@@ -11,10 +11,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ClassesEffects } from './state/classes.effects';
-import { classesFeatureKey, reducer } from './state/classes.reducer';
+import { classesFeatureKey, reducerClass } from './state/classes.reducer';
 import { StudentsEffects } from '../students/state/students.effects';
-import { studentsFeatureKey } from '../students/state/students.reducer';
-import { coursesFeatureKey } from '../courses/state/courses.reducer';
+import { reducerStudent, studentsFeatureKey } from '../students/state/students.reducer';
+import { coursesFeatureKey, reducerCourse } from '../courses/state/courses.reducer';
 import { CoursesEffects } from '../courses/state/courses.effects';
 
 
@@ -28,11 +28,11 @@ import { CoursesEffects } from '../courses/state/courses.effects';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(classesFeatureKey, reducer),
+    StoreModule.forFeature(classesFeatureKey, reducerClass),
     EffectsModule.forFeature([ClassesEffects]),
-    StoreModule.forFeature(studentsFeatureKey, reducer),
+    StoreModule.forFeature(studentsFeatureKey, reducerStudent),
     EffectsModule.forFeature([StudentsEffects]),
-    StoreModule.forFeature(coursesFeatureKey, reducer),
+    StoreModule.forFeature(coursesFeatureKey, reducerCourse),
     EffectsModule.forFeature([CoursesEffects]),
     ClassesRoutingModule,
     SharedModule

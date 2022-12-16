@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AppState } from 'src/app/core/app.state';
 import { CourseState } from 'src/app/models/course.state';
 import { Course } from 'src/app/models/courses';
 import { CoursesService } from '../../services/courses.service';
@@ -24,7 +25,7 @@ export class EditCoursesComponent {
   constructor(
     public dialogRef: MatDialogRef<EditCoursesComponent>,
     @Inject(MAT_DIALOG_DATA) public curso: Course,
-    private store: Store<CourseState>,
+    private store: Store<AppState>,
   )
   {
 

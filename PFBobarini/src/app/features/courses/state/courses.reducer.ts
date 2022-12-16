@@ -9,7 +9,7 @@ export const courseState: CourseState = {
   courses: []
 };
 
-export const reducer = createReducer(
+export const reducerCourse = createReducer(
   courseState,
 
   on(CoursesActions.loadCourses, (state) => {

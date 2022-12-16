@@ -14,7 +14,7 @@ export const initialState: ClassesState = {
   classes:[]
 };
 
-export const reducer = createReducer(
+export const reducerClass = createReducer(
   initialState,
 
   on(ClassesActions.loadClasses, state => {return {...state, loading: true}}),

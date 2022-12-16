@@ -1,6 +1,6 @@
 import { Classes } from "./classes";
 
-export interface CourseState{
+export interface ClassState{
     loading: boolean;
     clases: Classes[];
 }

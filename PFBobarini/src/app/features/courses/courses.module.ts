@@ -7,7 +7,7 @@ import { EditCoursesComponent } from './components/edit-courses/edit-courses.com
 import { ListCoursesComponent } from './components/list-courses/list-courses.component';
 import { InitCoursesComponent } from './components/init-courses/init-courses.component';
 import { StoreModule } from '@ngrx/store';
-import { coursesFeatureKey, reducer } from './state/courses.reducer';
+import { coursesFeatureKey, reducerCourse } from './state/courses.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CoursesEffects } from './state/courses.effects';
 import { SharedModule } from '../../shared/shared.module';
@@ -22,7 +22,7 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(coursesFeatureKey, reducer),
+    StoreModule.forFeature(coursesFeatureKey, reducerCourse),
     EffectsModule.forFeature([CoursesEffects]),
     CoursesRoutingModule,
     SharedModule

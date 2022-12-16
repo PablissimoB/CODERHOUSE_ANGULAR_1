@@ -10,7 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { UserEffects } from './state/user.effects';
-import { userFeatureKey, reducer } from './state/user.reducer';
+import { userFeatureKey, reducerUser } from './state/user.reducer';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { userFeatureKey, reducer } from './state/user.reducer';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(userFeatureKey, reducer),
+    StoreModule.forFeature(userFeatureKey, reducerUser),
     EffectsModule.forFeature([UserEffects]),
     UsersRoutingModule,
     SharedModule

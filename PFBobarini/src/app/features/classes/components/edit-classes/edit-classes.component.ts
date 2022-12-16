@@ -9,7 +9,7 @@ import { editClasses, loadClasses } from '../../state/classes.actions';
 import { ClassesState } from '../../state/classes.reducer';
 import { selectStateClases } from '../../state/classes.selectors';
 import { loadCourses } from '../../../courses/state/courses.actions';
-import { CourseState } from '../../../../models/class.state';
+import { CourseState } from '../../../../models/course.state';
 import { selectStateCursos } from '../../../courses/state/courses.selectors';
 import { Datos } from 'src/app/models/auxiliar';
 
@@ -60,7 +60,7 @@ export class EditClassesComponent {
   }
   
   save(){
-    console.log(JSON.stringify(this.datos));
+    
     
     let c: Classes ={
       id : this.datos[0].id,

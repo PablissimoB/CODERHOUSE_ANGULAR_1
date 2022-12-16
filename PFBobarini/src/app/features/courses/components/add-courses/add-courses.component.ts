@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AppState } from 'src/app/core/app.state';
 import { CourseState } from 'src/app/models/course.state';
 import { Course } from 'src/app/models/courses';
 import { addCourse } from '../../state/courses.actions';
@@ -23,7 +24,7 @@ export class AddCoursesComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCoursesComponent>,
-    private store: Store<CourseState>,
+    private store: Store<AppState>,
   )
   {
 

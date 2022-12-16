@@ -20,14 +20,15 @@ export class CoursesService {
     }
 
      getAll(): Observable<Course[]>{
-    return this.http.get<Course[]>(`${environment.api}/courses`, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.manejarError)
-    )
+      return this.http.get<Course[]>(`${environment.api}/courses`);
+    // return this.http.get<Course[]>(`${environment.api}/courses`, {
+    //   headers: new HttpHeaders({
+    //     'content-type': 'application/json',
+    //     'encoding': 'UTF-8'
+    //   })
+    // }).pipe(
+    //   catchError(this.manejarError)
+    // )
   }
   getId(id:number){
     this.getAll().subscribe({

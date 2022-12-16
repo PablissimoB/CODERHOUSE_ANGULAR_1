@@ -10,6 +10,7 @@ import { StudentState } from '../../../../models/student.state';
 import { loadStudents, deleteStudent } from '../../state/students.actions';
 import { selectStateCargando, selectStateEstudiantes } from '../../state/students.selectors';
 import { EditStudentComponent } from '../edit-student/edit-student.component';
+import { AppState } from '../../../../core/app.state';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class ListStudentsComponent {
 
   constructor(
     private router: Router,
-    private store: Store <StudentState>,
+    private store: Store <AppState>,
     private dialog: MatDialog,
   )
   {

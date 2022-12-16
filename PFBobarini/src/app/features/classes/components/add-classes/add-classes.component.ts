@@ -57,7 +57,7 @@ export class AddClassesComponent {
       deleted: false,
       available: true,
     }
-    console.log(JSON.stringify(c));
+    
     this.store.dispatch(addClasses({classes: c}));
     this.dialogRef.close();
   }

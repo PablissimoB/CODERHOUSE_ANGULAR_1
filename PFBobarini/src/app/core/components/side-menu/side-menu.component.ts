@@ -24,7 +24,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         this.sesion = sesion;
         if(sesion.usuarioActivo != undefined){
           this.admin = sesion.usuarioActivo?.admin;
-          console.log(this.admin);
+          
         }
         
         
@@ -47,7 +47,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }
 
   irUsuario(){
-    console.log(this.admin);
+    
     if(this.admin ==false || this.admin == undefined){
       alert("Usted no tiene permisos para ingresar a la opción.");
     }
